@@ -6,7 +6,7 @@ const pendingGroup = new Set();
 
 
 let groupCounter = 1;
-const GROUP_SIZE = 2;
+const GROUP_SIZE = 5;
 
 
 const createGroup = (users) =>{

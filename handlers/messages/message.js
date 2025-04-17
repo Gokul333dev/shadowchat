@@ -1,29 +1,28 @@
-// const bot = require('../../bot');
 const matchManager = require('../matchManager');
 const groupManager = require('../groupManager');
 
-const handlePrivateMessage = async(ctx,userId) =>{
+const handlePrivateMessage = async (ctx, userId) => {
     const partnerId = matchManager.GetPartner(userId);
 
-    if(partnerId){
-        // const text = getMessageContent(ctx.message);
-
-        return forwardContent(ctx,partnerId,"Stranger");
+    if (partnerId) {
+        // No label for private chats
+        return forwardContent(ctx, partnerId);
     }
-}
+};
 
-const handleGroupMessage = async(ctx,userId)=>{
-    const {groupId,members,labels} = groupManager.getGroupOfUser(userId);
+const handleGroupMessage = async (ctx, userId) => {
+    const { groupId, members, labels } = groupManager.getGroupOfUser(userId);
 
-    // const message = getMessageContent(ctx.message);
-    if(groupId && members){
-        for(let memberId of members){
-            if(memberId != userId){
-                forwardContent(ctx,memberId,labels[userId]);
+    if (groupId && members) {
+        for (let memberId of members) {
+            if (memberId != userId) {
+                const label = labels[userId]; // Use label only for group messages
+                forwardContent(ctx, memberId, label);
             }
         }
     }
-}
+};
+
 const forwardContent = async (ctx, targetUserId, senderLabel = null) => {
     const message = ctx.message;
 
@@ -51,8 +50,7 @@ const forwardContent = async (ctx, targetUserId, senderLabel = null) => {
     }
 };
 
-
-  module.exports = {
+module.exports = {
     handleGroupMessage,
     handlePrivateMessage
-  };
+};

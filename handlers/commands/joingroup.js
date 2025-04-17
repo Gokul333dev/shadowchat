@@ -24,10 +24,10 @@ module.exports = (bot) =>{
 
             members.forEach(member => {
                 if(member!=userId){
-                    bot.telegram.sendMessage(member, `✅ A new group has been formed! ${labels[member]}! Say hi to your new friends.`);
+                    bot.telegram.sendMessage(member, `✅ A new group has been formed! You Are ${labels[member]}! Say hi to your new friends.`);
                 }
             });
-            ctx.reply(`✅ A new group has been formed!You are ${labels[userId]}! Say hi to your new friends.`);
+            ctx.reply(`✅ A new group has been formed! You are ${labels[userId]}! Say hi to your new friends.`);
         }
 
         else{
